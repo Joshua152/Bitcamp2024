@@ -32,6 +32,8 @@ houses: [{
     bed: int,
     bath: float,
     rooms: int,
+    a_score: float,
+    p_score: float
 },...]
 
 return: [(house_object, affordability_score, preference_score), ...]
@@ -77,7 +79,13 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
     
     house_tuples.sort(key=sort_func, reverse=True)
 
-    return house_tuples
+    scored_houses = []
+    for (house_object, a_score, p_score) in house_tuples:
+        house_object["a_score"] = a_score
+        house_object["p_score"] = p_score
+        scored_houses.append(house_object)
+
+    return scored_houses
 
 '''
 income: annual post tax income
@@ -159,5 +167,5 @@ prefs = {
 # for house in sorted:
 #     print(house)
 
-print(calc_affordable_price(100000, 500))
-get_viable_houses("95014", prefs, 100000, 500)
+# print(calc_affordable_price(100000, 500))
+# get_viable_houses("95014", prefs, 100000, 500)
