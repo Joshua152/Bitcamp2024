@@ -1,0 +1,49 @@
+#popup {
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    position: fixed;
+    left: -100%;
+    top: 10%;
+    transition: left 0.5s;
+    border-radius: 15px;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+#close-popup {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 20px;
+    padding: 5px 10px;
+    width: auto;
+    border-radius: 20%;
+    outline: none;
+    border: none;
+    background-color: var(--second-button-color);
+    color: #eee;
+}
+
+#close-popup:hover {
+    box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.score::after {
+    content: "";
+    position: relative;
+    width: 100px;
+    height: 1em;
+    background-image: linear-gradient(to right, red, yellow, green);
+}
+
+.score::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: calc(100px - var(--s) * 10px);
+    height: 1em;
+    background: rgba(255, 255, 255, 0.5);
+}
