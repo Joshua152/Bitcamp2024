@@ -5,12 +5,12 @@ from data import *
 '''
 Eventually use customerId to get income and debt from nessie api
 '''
-def get_viable_houses(zipcode, prefs, customerId):
-    (min_afford, max_afford) = calc_affordable_price(100000, 500)
+def get_viable_houses(zipcode, prefs, income, debt):
+    (min_afford, max_afford) = calc_affordable_price(income, debt)
 
     house_list = get_houses(zipcode, 
-               (prefs["bed"], prefs["bed"] + 2), 
-               (prefs["bath"], prefs["bath"] + 2), 
+               (prefs["bed"], prefs["bed"] + 3), 
+               (prefs["bath"], prefs["bath"] + 6), 
                (min_afford, max_afford)
     )
 
@@ -42,7 +42,14 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
 
         # anything below the mean of min and max afford is completely affordable (a_score = 1)
         impact = 0.8 # how much deviation from the mean impacts affordability
-        score = 1 - (impact * (list_price - (min_afford + (max_afford - min_afford) / 2)) / (max_afford - min_afford))
+        print("-----------")
+        print((impact * (list_price - ((min_afford + max_afford) / 2)) / (max_afford - min_afford)))
+        print(list_price)
+        print(((min_afford + max_afford) / 2))
+        print(max_afford - min_afford)
+        print(list_price - (((min_afford + max_afford) / 2)))
+        print("-----------")
+        score = 1 - (impact * (list_price - ((min_afford + max_afford) / 2)) / (max_afford - min_afford))
 
         return min(score, 1)
 
@@ -144,8 +151,8 @@ house_list = [
 
 prefs = {
     "list_price": 2000,
-    "bed": 2,
-    "bath": 5
+    "bed": 1,
+    "bath": 1
 }
 
 # (min_afford, max_afford) = calc_affordable_price(100000, 500)
@@ -154,4 +161,4 @@ prefs = {
 #     print(house)
 
 print(calc_affordable_price(100000, 500))
-get_viable_houses("95014", prefs, 0)
+get_viable_houses("95014", prefs, 100000, 500)
