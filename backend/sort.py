@@ -70,7 +70,6 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
         house_tuples.append((house, calc_a_score(house), p_score))
 
     house_tuples = [(house, a_score, p_score / max_p_score) for (house, a_score, p_score) in house_tuples]
-
     def sort_func(house_tuple):
         (_, a_score, p_score) = house_tuple
         boosted_a_score = a_score
