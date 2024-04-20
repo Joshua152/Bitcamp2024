@@ -10,7 +10,7 @@ returns: list of house dicts with keys: attomId, lotsize, address, bathstotal, b
 '''
 def get_houses(zipcode, beds, baths, price):
     url = f"https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/detail?postalCode={zipcode}&minBeds={beds[0]}&maxBeds={beds[1]}&minBathsTotal={baths[0]}&maxBathsTotal={baths[1]}&minAVMValue={price[0]}&maxAVMValue={price[1]}&debug=True"
-    apiKey = "d5b7ba729cc30f14b859e64c8a2daea6"
+    apiKey = "2b1e86b638620bf2404521e6e9e1b19e"
 
     headers = {
         "Accept": "application/json",
