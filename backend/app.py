@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 import data
 import sort
@@ -19,4 +19,6 @@ def get():
 
     sorted_houses = sort.sort_house_list(req["preferences"], houses, price_range[0], price_range[1])
 
-    return sorted_houses
+    response = jsonify(sorted_houses)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
