@@ -5,12 +5,12 @@ from data import *
 '''
 Eventually use customerId to get income and debt from nessie api
 '''
-def get_viable_houses(zipcode, prefs, customerId):
-    (min_afford, max_afford) = calc_affordable_price(100000, 500)
+def get_viable_houses(zipcode, prefs, income, debt):
+    (min_afford, max_afford) = calc_affordable_price(income, debt)
 
     house_list = get_houses(zipcode, 
-               (prefs["bed"], prefs["bed"] + 2), 
-               (prefs["bath"], prefs["bath"] + 2), 
+               (prefs["bed"], prefs["bed"] + 3), 
+               (prefs["bath"], prefs["bath"] + 6), 
                (min_afford, max_afford)
     )
 
@@ -32,6 +32,8 @@ houses: [{
     bed: int,
     bath: float,
     rooms: int,
+    a_score: float,
+    p_score: float
 },...]
 
 return: [(house_object, affordability_score, preference_score), ...]
@@ -42,7 +44,14 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
 
         # anything below the mean of min and max afford is completely affordable (a_score = 1)
         impact = 0.8 # how much deviation from the mean impacts affordability
-        score = 1 - (impact * (list_price - (min_afford + (max_afford - min_afford) / 2)) / (max_afford - min_afford))
+        print("-----------")
+        print((impact * (list_price - ((min_afford + max_afford) / 2)) / (max_afford - min_afford)))
+        print(list_price)
+        print(((min_afford + max_afford) / 2))
+        print(max_afford - min_afford)
+        print(list_price - (((min_afford + max_afford) / 2)))
+        print("-----------")
+        score = 1 - (impact * (list_price - ((min_afford + max_afford) / 2)) / (max_afford - min_afford))
 
         return min(score, 1)
 
@@ -63,7 +72,6 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
         house_tuples.append((house, calc_a_score(house), p_score))
 
     house_tuples = [(house, a_score, p_score / max_p_score) for (house, a_score, p_score) in house_tuples]
-
     def sort_func(house_tuple):
         (_, a_score, p_score) = house_tuple
         boosted_a_score = a_score
@@ -71,7 +79,13 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
     
     house_tuples.sort(key=sort_func, reverse=True)
 
-    return house_tuples
+    scored_houses = []
+    for (house_object, a_score, p_score) in house_tuples:
+        house_object["a_score"] = a_score
+        house_object["p_score"] = p_score
+        scored_houses.append(house_object)
+
+    return scored_houses
 
 '''
 income: annual post tax income
@@ -144,8 +158,8 @@ house_list = [
 
 prefs = {
     "list_price": 2000,
-    "bed": 2,
-    "bath": 5
+    "bed": 1,
+    "bath": 1
 }
 
 # (min_afford, max_afford) = calc_affordable_price(100000, 500)
@@ -153,5 +167,5 @@ prefs = {
 # for house in sorted:
 #     print(house)
 
-print(calc_affordable_price(100000, 500))
-get_viable_houses("95014", prefs, 0)
+# print(calc_affordable_price(100000, 500))
+# get_viable_houses("95014", prefs, 100000, 500)

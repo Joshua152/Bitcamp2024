@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 import data
 import sort
@@ -16,4 +16,9 @@ def get():
     price_range = sort.calc_affordable_price(req["income"], req["debt"])
 
     houses = data.get_houses(req["zipcode"], bed_range, bath_range, price_range)
-    return houses
+
+    sorted_houses = sort.sort_house_list(req["preferences"], houses, price_range[0], price_range[1])
+
+    response = jsonify(sorted_houses)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
