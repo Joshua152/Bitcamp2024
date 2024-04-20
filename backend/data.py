@@ -43,5 +43,4 @@ def get_houses(zipcode, beds, baths, price):
             
             houses.append(data)
 
-
     return houses

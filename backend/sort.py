@@ -1,4 +1,22 @@
 import math
+import json
+from data import *
+
+'''
+Eventually use customerId to get income and debt from nessie api
+'''
+def get_viable_houses(zipcode, prefs, customerId):
+    (min_afford, max_afford) = calc_affordable_price(100000, 500)
+
+    house_list = get_houses(zipcode, 
+               (prefs["bed"], prefs["bed"] + 2), 
+               (prefs["bath"], prefs["bath"] + 2), 
+               (min_afford, max_afford)
+    )
+
+    house_tuples = sort_house_list(prefs, house_list, min_afford, max_afford)
+    for h in house_tuples:
+        print(h)
 
 '''
 prefs: {
@@ -16,11 +34,11 @@ houses: [{
     rooms: int,
 },...]
 
-return: 
+return: [(house_object, affordability_score, preference_score), ...]
 '''
 def sort_house_list(prefs, house_list, min_afford, max_afford):
     def calc_a_score(house): 
-        list_price = house["listPrice"]
+        list_price = house["listingPrice"]
 
         # anything below the mean of min and max afford is completely affordable (a_score = 1)
         impact = 0.8 # how much deviation from the mean impacts affordability
@@ -29,10 +47,10 @@ def sort_house_list(prefs, house_list, min_afford, max_afford):
         return min(score, 1)
 
     def calc_p_score(house):
-        footage_per_dollar = house["lotSize"] / house["listPrice"]
-        bed_score = max(0, 75 * (house["bed"] - prefs["bed"]))
-        bath_score = max(0, 75 * (house["bath"] - prefs["bath"]))
-        rooms_score = 20 * house["rooms"]
+        footage_per_dollar = house["lotsize"] / house["listingPrice"]
+        bed_score = max(0, 75 * (house["beds"] - prefs["bed"]))
+        bath_score = max(0, 75 * (house["bathstotal"] - prefs["bath"]))
+        rooms_score = 20 * house["roomsTotal"]
 
         return footage_per_dollar + bed_score + bath_score + rooms_score
     
@@ -80,7 +98,7 @@ def calc_affordable_price(income, debt):
         return P + down_payment
 
     # calculate affordable price range (min, max) given monthly payments
-    return (calc_home_price(min_monthly_payment), calc_home_price(max_monthly_payment))
+    return (int(calc_home_price(min_monthly_payment)), int(calc_home_price(max_monthly_payment)))
 
 '''
 {
@@ -130,7 +148,10 @@ prefs = {
     "bath": 5
 }
 
-(min_afford, max_afford) = calc_affordable_price(100000, 500)
-sorted = sort_house_list(prefs, house_list, min_afford, max_afford)
-for house in sorted:
-    print(house)
+# (min_afford, max_afford) = calc_affordable_price(100000, 500)
+# sorted = sort_house_list(prefs, house_list, min_afford, max_afford)
+# for house in sorted:
+#     print(house)
+
+print(calc_affordable_price(100000, 500))
+get_viable_houses("95014", prefs, 0)
