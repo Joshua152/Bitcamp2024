@@ -1,4 +1,4 @@
-/* search.css */
+import
 
 .search-bar {
   display: flex;
@@ -15,12 +15,22 @@
 
 input[type="text"] {
   margin-top: 20px;
-  border-radius: 25px / 50px; /* Rounded corners */
+  border-radius: 25px / 30px; /* Rounded corners */
   width: 50%; /* Make input fill its parent width */
   height: 50px; /* Adjust height */
   font-size: 18px; /* Adjust font size */
 }
 
-button {
-  margin: 5px;
+.button {
+  height: 50px;
+  width: 50px;
+  border-width: 10px;
+  background-color: ;
+  border-color:  var(--first-button-color);
 }
+
+.button-selected {
+  border-color: var(--second-button-color);
+}
+
+

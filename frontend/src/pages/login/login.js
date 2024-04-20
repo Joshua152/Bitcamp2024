@@ -1,16 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
+import './login.css';
 
 const CLIENT_ID = "1075530525267-lmm0im1fqil6vilbp4vrk2fpobevqutp.apps.googleusercontent.com"; // Our actual client ID
-const REDIRECT_URI = "frontend/src/pages/profile/profile.js"; // The URI that Google will redirect to after authentication
+const REDIRECT_URI = "http://localhost:3000/profile/"; // The URI that Google will redirect to after authentication
 const SCOPE = "email profile"; // The scopes you are requesting access to
 const RESPONSE_TYPE = "token";
+
 
 function Login() {
   const navigate = useNavigate();
 
+  let history = useHistory();
+
+  const handleSignIn = () => {
+    handleLogin();
+    history.replace("/");
+  }
+
   const handleLogin = () => {
-    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
     window.open(url, "googleLogin", "width=500,height=600");
   };
 
@@ -33,11 +42,11 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <button onClick={handleLogin} className="google-sign-in-btn">
-          Sign in with Google
-        </button>
-      </div>
+        <div className="welcome-box">
+            <button type="button" class="login-with-google-btn" onClick={handleLogin}>
+                Sign in with Google
+            </button>
+        </div>
     </div>
   );
 }

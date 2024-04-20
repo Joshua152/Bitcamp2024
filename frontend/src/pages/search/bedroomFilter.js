@@ -9,9 +9,12 @@ function BedroomFilter() {
 
   return (
     <div className="filter">
-      <button onClick={() => handleBedroomChange(1)}>1 Bedroom</button>
-      <button onClick={() => handleBedroomChange(2)}>2 Bedrooms</button>
-      <button onClick={() => handleBedroomChange(3)}>3 Bedrooms</button>
+      <button className={`button ${bedrooms === 1 ? 'button-selected' : ''}`}
+          onClick={() => handleBedroomChange(1)}>1</button>
+      <button className={`button ${bedrooms === 2 ? 'button-selected' : ''}`}
+               onClick={() => handleBedroomChange(2)}>2</button>
+      <button className={`button ${bedrooms === 3 ? 'button-selected' : ''}`}
+              onClick={() => handleBedroomChange(3)}>3</button>
       <p>Number of bedrooms: {bedrooms}</p>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './search.css';
 function BathroomFilter() {
   const [bathrooms, setBathrooms] = useState(0);
 
@@ -9,9 +9,12 @@ function BathroomFilter() {
 
   return (
     <div className="filter">
-      <button onClick={() => handleBathroomChange(1)}>1 Bathroom</button>
-      <button onClick={() => handleBathroomChange(2)}>2 Bathrooms</button>
-      <button onClick={() => handleBathroomChange(3)}>3 Bathrooms</button>
+      <button className={`button ${bathrooms === 1 ? 'button-selected' : ''}`}
+          onClick={() => handleBathroomChange(1)}>1</button>
+      <button className={`button ${bathrooms === 2 ? 'button-selected' : ''}`}
+               onClick={() => handleBathroomChange(2)}>2</button>
+      <button className={`button ${bathrooms === 3 ? 'button-selected' : ''}`}
+              onClick={() => handleBathroomChange(3)}>3</button>
       <p>Number of bathrooms: {bathrooms}</p>
     </div>
   );
