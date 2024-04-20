@@ -37,9 +37,11 @@ def get_houses(zipcode, beds, baths, price):
         avm_url = f"https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail?attomid={attomId}"
         avm_res = requests.get(avm_url, headers=headers)
 
-        data["listingPrice"] = avm_res.json()["property"][0]["avm"]["amount"]["value"]
-
-        houses.append(data)
+        properties = avm_res.json()["property"]
+        if len(properties) != 0:
+            data["listingPrice"] = properties[0]["avm"]["amount"]["value"]
+            
+            houses.append(data)
 
 
     return houses
