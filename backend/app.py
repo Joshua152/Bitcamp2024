@@ -3,7 +3,7 @@ import json
 from flask import Flask, request
 
 import data
-import filter
+import sort
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def get():
 
     bed_range = (int(req["preferences"]["bed"]) - 2, req["preferences"]["bed"] + 2)
     bath_range = (int(req["preferences"]["bath"]) - 2, req["preferences"]["bath"] + 2)
-    price_range = filter.calc_affordable_price(req["income"], req["debt"])
+    price_range = sort.calc_affordable_price(req["income"], req["debt"])
 
     houses = data.get_houses(req["zipcode"], bed_range, bath_range, price_range)
     return houses
