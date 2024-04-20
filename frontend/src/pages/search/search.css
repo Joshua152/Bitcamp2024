@@ -1,5 +1,4 @@
-import
-
+/* CSS */
 .search-bar {
   display: flex;
   flex-direction: column;
@@ -24,13 +23,13 @@ input[type="text"] {
 .button {
   height: 50px;
   width: 50px;
-  border-width: 10px;
-  background-color: ;
+  font-weight: bold;
+  border-width: 2px;
+  background-color: white;
   border-color:  var(--first-button-color);
 }
 
 .button-selected {
+  background-color: lightblue;
   border-color: var(--second-button-color);
 }
-
-

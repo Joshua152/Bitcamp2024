@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const CLIENT_ID = "1075530525267-lmm0im1fqil6vilbp4vrk2fpobevqutp.apps.googleusercontent.com"; // Our actual client ID
@@ -11,15 +11,14 @@ const RESPONSE_TYPE = "token";
 function Login() {
   const navigate = useNavigate();
 
-  let history = useHistory();
 
   const handleSignIn = () => {
     handleLogin();
-    history.replace("/");
+    navigate.replace("/profile");
   }
 
   const handleLogin = () => {
-    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect-uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
     window.open(url, "googleLogin", "width=500,height=600");
   };
 

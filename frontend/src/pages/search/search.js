@@ -27,7 +27,6 @@ function SearchBar() {
         onChange={handleChange}
         onKeyDown={handleEnter}
       />
-      <p>You are searching for: {searchTerm}</p>
       <BedroomFilter />
       <BathroomFilter />
     </div>
