@@ -1,38 +1,24 @@
 .App {
   text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* Default light mode colors */
+:root {
+  --bg-color: #F3F9F8;  /* Background color */
+  --text-color: #000;        /* Text color: black */
+  --opposite-text-color: #FFF;
+  --first-button-color: #87C0CD;
+  --second-button-color: #226597;
+  --alternate-bg: #072946;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Dark mode colors */
+[data-theme="dark"] {
+  --bg-color: #072946;  /* Background color for dark mofe */
+  --text-color: #FFF;        /* Text color: White */
+  --opposite-text-color: #000;
+  --first-button-color: #226597;
+  --second-button-color: #87C0CD;
+  --dark-blue: #F3F9F8;
 }

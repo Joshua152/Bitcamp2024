@@ -1,0 +1,27 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: color(--bg-color);
+}
+
+.login-box {
+    background-color: color(--alternate-bg); /* Google's blue color */
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.google-sign-in-btn {
+    background-color: color(--bg-color); /* Button is white */
+    color: color(--text-color); /* Text is Google's blue */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google-sign-in-btn:hover {
+    background-color: color(--bg-color); /* Light grey background on hover */
+}
