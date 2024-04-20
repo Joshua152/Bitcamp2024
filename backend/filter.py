@@ -1,3 +1,5 @@
+import math
+
 '''
 prefs: {
     bed: int,
@@ -5,49 +7,53 @@ prefs: {
 }
 
 houses: [{
+    attomId: 
     addr: string,
-    list_price: int,
+    listPrice: int,
+    lotSize: int,
     bed: int,
-    bath: int
+    bath: float,
+    rooms: int,
 },...]
 
-return: list of houses with the following for each one
-{
-    house...
-    affordability_score: int,
-    preference_score: int
-}
+return: 
 '''
-def filter_house_list(prefs, house_list, min_afford, max_afford):
-    price_range = 0.2 # price can differ by 20% off preference
+def sort_house_list(prefs, house_list, min_afford, max_afford):
+    def calc_a_score(house): 
+        list_price = house["listPrice"]
 
-    def check_prefs_ok(house):
-        price_ok = house["list_price"] <= prefs["list_price"] * (1 + price_range) and \
-            house["list_price"] >= prefs["list_price"] * (1 - price_range)
-        bed_ok = house["bed"] == prefs["bed"]
-        bath_ok = house["bath"] == prefs["bath"]
+        # anything below the mean of min and max afford is completely affordable (a_score = 1)
+        impact = 0.8 # how much deviation from the mean impacts affordability
+        score = 1 - (impact * (list_price - (min_afford + (max_afford - min_afford) / 2)) / (max_afford - min_afford))
 
-        return price_ok and bed_ok and bath_ok
-    
-    def calc_a_score(house):
-        
-        return 1;
+        return min(score, 1)
 
     def calc_p_score(house):
-        # p = 1 - (deviation from desired price) - (deviation from bed) - (deviation from bath)
-        price_deviation = 1 - abs((house["list_price"] - prefs["list_price"]) / prefs["list_price"])
-        bed_deviation = 0.1 * abs(house["bed"] - prefs["bed"])
-        bath_deviation = 0.1 * abs(house["bath"] - prefs["bath"])
-        return max(0, 1 - price_deviation - bed_deviation - bath_deviation)
+        footage_per_dollar = house["lotSize"] / house["listPrice"]
+        bed_score = max(0, 75 * (house["bed"] - prefs["bed"]))
+        bath_score = max(0, 75 * (house["bath"] - prefs["bath"]))
+        rooms_score = 20 * house["rooms"]
 
-    filtered = filter(check_prefs_ok, house_list)  
-    for house in filtered:
-        house.update({
-            "affordability_score": calc_a_score(house),
-            "preference_score": calc_p_score(house)
-        })
+        return footage_per_dollar + bed_score + bath_score + rooms_score
+    
+    max_p_score = 0
 
-    return filtered
+    house_tuples = []
+    for house in house_list:
+        p_score = calc_p_score(house)
+        max_p_score = max(max_p_score, p_score)
+        house_tuples.append((house, calc_a_score(house), p_score))
+
+    house_tuples = [(house, a_score, p_score / max_p_score) for (house, a_score, p_score) in house_tuples]
+
+    def sort_func(house_tuple):
+        (_, a_score, p_score) = house_tuple
+        boosted_a_score = a_score
+        return math.sqrt(boosted_a_score * boosted_a_score + p_score * p_score)
+    
+    house_tuples.sort(key=sort_func, reverse=True)
+
+    return house_tuples
 
 '''
 income: annual post tax income
@@ -76,24 +82,45 @@ def calc_affordable_price(income, debt):
     # calculate affordable price range (min, max) given monthly payments
     return (calc_home_price(min_monthly_payment), calc_home_price(max_monthly_payment))
 
+'''
+{
+    attomId: string
+    addr: string,
+    listPrice: int,
+    lotSize: int
+    bed: int,
+    bath: float,
+    rooms: int,
+}
+'''
+
 house_list = [
     {
+        "attomId": 1,
         "addr": "addr 1",
-        "list_price": 1345,
+        "listPrice": 1345,
+        "lotSize": 1000,
         "bed": 3,
-        "bath": 5
+        "bath": 5,
+        "rooms": 6
     },
     {
+        "attomId": 2,
         "addr": "addr 2",
-        "list_price": 2000,
+        "listPrice": 2000,
+        "lotSize": 1500,
         "bed": 2,
-        "bath": 5
+        "bath": 5,
+        "rooms": 6
     },
     {
+        "attomId": 3,
         "addr": "addr 3",
-        "list_price": 3843,
+        "listPrice": 3843,
+        "lotSize": 1200,
         "bed": 1,
-        "bath": 20
+        "bath": 3,
+        "rooms": 5
     }
 ]
 
@@ -103,8 +130,7 @@ prefs = {
     "bath": 5
 }
 
-filtered = filter_house_list(prefs, house_list)
-for house in filtered:
+(min_afford, max_afford) = calc_affordable_price(100000, 500)
+sorted = sort_house_list(prefs, house_list, min_afford, max_afford)
+for house in sorted:
     print(house)
-
-print(calc_affordable_price(100000, 500))
