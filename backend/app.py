@@ -36,3 +36,6 @@ def get_range(value):
         return (value - 1, 100)
     
     return (max(0, value - 2), value + 2)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
