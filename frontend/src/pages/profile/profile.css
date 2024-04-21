@@ -34,6 +34,7 @@ form {
   height: 50px;
   text-align: center;
   align-content: center;
+  padding: 17px;
 
   background-color: var(--bg-color);
   margin-top: 40px; /* Adjust margin-top to reduce space */

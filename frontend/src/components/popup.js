@@ -6,8 +6,8 @@ function Popup({ data, show, closePopup }) {
             <span><h1>{data.address}</h1></span>
             <div id="popup-values">
                 <span>Estimated Value:</span><span>${data.listingPrice}</span>
-                <span>Affordability Score: {Math.floor(data.a_score*100)}%</span><div className="score-bar" style={{ "--s": 9 * data.a_score }} />
-                <span>Preference Score: {Math.floor(data.p_score*100)}%</span><div className="score-bar" style={{ "--s": 9 * data.p_score }} />
+                <span>Affordability Score: {Math.floor(data.a_score*100)}%</span><div className="score-bar" style={{ "--s": 10 * data.a_score }} />
+                <span>Preference Score: {Math.floor(data.p_score*100)}%</span><div className="score-bar" style={{ "--s": 10 * data.p_score }} />
                 <span>Bedrooms: {data.beds}</span>
                 <span>Bathrooms: {data.bathstotal}</span>
                 <span style={{"grid-column": "1 / span 2"}}>Lot Size: {data.lotsize}ft²</span>

@@ -94,8 +94,8 @@ debt: minimum monthly debt
 def calc_affordable_price(income, debt):
     # calculate monthly payments
     monthly_income = (income / 12) - debt
-    min_monthly_payment = 0.15 * monthly_income
-    max_monthly_payment = 0.4 * monthly_income
+    min_monthly_payment = 0.05 * monthly_income
+    max_monthly_payment = 0.7 * monthly_income
 
     '''
     M = how much pay per month
