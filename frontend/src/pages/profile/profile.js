@@ -1,49 +1,53 @@
 import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext';
+import { initializeApp } from 'firebase/app';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../../firebase.js'
+import Input from './input.js'
+import Header from '../../components/header.js';
+import './profile.css';
 
 const Profile = () => {
   const { user, logOut } = UserAuth();
+  const [income, setIncome] = useState(-1);
+  const [monthlyDebt, setMonthlyDebt] = useState(-1);
   const [creditScore, setCreditScore] = useState(-1);
+  const [errored, setErrored] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSignOut = async () => {
-    try {
-      await logOut()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const handleNumChange = (event) => {
-    change = parseInt(event.target.value)
-    if (isNaN(change)) {
-      return
+  const handleUpdate = async() => {
+    if(income === -1 || monthlyDebt === -1 || creditScore === -1) {
+      setErrored(true)
+      return;
     }
 
-    setCreditScore(change)
-  }
+    await setDoc(doc(db, "profiles", user.uid), {
+      income: parseInt(income),
+      monthlyDebt: parseInt(monthlyDebt),
+      creditScore: parseInt(creditScore)
+    });
+    
+    navigate("/search");
+;;)
+  }marginTop: '20px', {/* , marginBottom: "20px", visibility: errored ? 'visible' : 'hidden'}}>P */}
+        {/* <p style={{visibility: errored ? 'visible' : 'hidden'}}>Error: please fill all fields</p> */}
 
-  // Need credit score, income after tax, debt, zipcode, 
-
-  return (
-    <div className='body'>
-      <div className='profile-container'>
-        <h1>Profile</h1>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Enter a zip code here"
-            value={creditScore < 0 ? '' : creditScore}
-            onChange={handleNumChange}
-          />
-        </div>
-      </div>
+        <Input type="number" label="Annual Post-Tax Income" placeholder="Enter annual post-tax income" handleValue={() => {income}} handleChange={(event) => {setIncome(event.target.value)}}/>
+        <Input type="number" label="Monthly Debt" placeholder="Enter monthly debt" handleValue={() => {monthlyDebt}} handleChange={(event) => {setMonthlyDebt(event.target.value)}}/>
+        <Input type="number" label="Credit Score" placeholder="Enter credit score" handleValue={() => {creditScore}} handleChange={(event) => {setCreditScore(event.target.value)}}/>
       
-      {user?.displayName ? (
-        <button onClick={handleSignOut}> <Link to='../login'>Logout </Link></button>
-      ) : (
-        <Link to='../login'></Link>
-      ) }
+        <div className='btn' onClick={handleUpdate}>Update</div>
+      </div>
+
+      <div className='logout-wrapper'>
+        {user?.displayName ? (
+          // <Link to='../login'>Logout</Link>
+          <div className='btn' onClick={handleSignOut}><a href='../login'>Logout</a></div>
+        ) : (
+          <Link to='../login'></Link>
+        ) }
+      </div>
     </div>
   );
 };

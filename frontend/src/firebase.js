@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-
+import { getFirestore, doc, getDoc } from "@firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,4 +21,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+export const getProfileInfo = async function(user) {
+  const docRef = doc(db, "profiles", user.uid);
+  const docSnap = await getDoc(docRef)
+
+  console.log(user.uid)
+  console.log(docSnap.exists())
+
+  if(docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return null;
+  }
+}

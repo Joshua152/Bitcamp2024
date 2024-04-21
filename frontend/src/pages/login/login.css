@@ -2,7 +2,6 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  overflow:hidden;
 }
 .mid-container {
   display: flex;
@@ -14,15 +13,12 @@
   z-index: 2;
 }
 .welcome-box {
-  width: 560px;
-  height: 700px;
+  width: 500px;
+  height: 400px;
   background-color: var(--alternate-bg);
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding-left: 8%;
-  padding-right: 8%;
-  padding-top: 7%;
-  padding-bottom: 7%;
+  padding: 8%;
   box-sizing: border-box; 
   display: flex;
   flex-direction: column; 
@@ -35,10 +31,20 @@
   justify-content: center; /* Center horizontally */
 }
 
+.logo{
+  width:100%;
+  height: auto
+}
+
+.small-logo{
+  width:100%;
+  height: auto
+}
+
 .title {
   text-align: center;
   color: var(--opposite-text-color);
-  font-size: 50px;
+  font-size: 36px;
 }
 
 .area {

@@ -2,15 +2,18 @@
     background: var(--bg-color);
     display: flex;
     flex-direction: column;
-    width: 80%;
-    height: 80%;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    height: 90%;
     position: fixed;
     left: -100%;
-    top: 10%;
+    top: 5%;
     transition: left 0.5s;
     border-radius: 15px;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.5);
     padding: 20px;
+    z-index: 2;
 }
 
 #close-popup {
@@ -31,19 +34,32 @@
     box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
-.score::after {
-    content: "";
-    position: relative;
-    width: 100px;
+#popup-values {
+    height: 80%;
+    display: grid;
+    grid-template: auto auto auto auto / 1fr 1fr 3fr;
+    grid-gap: 25px;
+}
+
+.score-bar {
     height: 1em;
+    width: auto;
     background-image: linear-gradient(to right, red, yellow, green);
 }
 
-.score::before {
+.score-bar::after {
     content: "";
-    position: absolute;
-    right: 0;
-    width: calc(100px - var(--s) * 10px);
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     height: 1em;
-    background: rgba(255, 255, 255, 0.5);
+    width: calc(100% - var(--s)*10%);
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+#map-iframe {
+    width: 100%;
+    height: 100%;
+    grid-area: 1 / 3 / 6 / 4;
 }

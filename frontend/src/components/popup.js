@@ -1,17 +1,27 @@
 import "./popup.css";
 
 function Popup({ data, show, closePopup }) {
-    return ( 
-    <div id="popup" style={{left: show && "10%"}}>
-        <span><h1>{data.address}</h1></span>
-        <span>Estimated Value: ${data.listingPrice}</span>
-        <span className="score" style={{"--s": 10 * data.a_score}}>Affordability Score: {data.a_score}</span>
-        <span className="score" style={{"--s": 10 * data.p_score}}>Preference Score: {data.p_score}</span>
-        <span>Bedrooms: {data.beds}</span>
-        <span>Bathrooms: {data.bathstotal}</span>
+    return (
+        <div id="popup" style={{ left: show && "5%" }}>
+            <span><h1>{data.address}</h1></span>
+            <div id="popup-values">
+                <span>Estimated Value:</span><span>${data.listingPrice}</span>
+                <span>Affordability Score: {data.a_score}</span><div className="score-bar" style={{ "--s": 9 * data.a_score }} />
+                <span>Preference Score: {data.p_score}</span><div className="score-bar" style={{ "--s": 9 * data.p_score }} />
+                <span>Bedrooms: {data.beds}</span>
+                <span>Bathrooms: {data.bathstotal}</span>
+                <span style={{"grid-column": "1 / span 2"}}>Lot Size: {data.lotsize}ft²</span>
+                <iframe
+                    frameBorder="0"
+                    id="map-iframe"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBlb-lAQkxT5aTLVAUu7nNMmMk7cKSHrPY&q=${data.address}&maptype=satellite`}
+                    allowFullScreen>
+                </iframe>
+            </div>
 
-        <button onClick={closePopup} id="close-popup">X</button>
-    </div> );
+            <button onClick={closePopup} id="close-popup">X</button>
+        </div>);
 }
 
 export default Popup;

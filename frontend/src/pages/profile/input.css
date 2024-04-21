@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+input[type="text"] {
+    margin-top: 10px;
+    border-radius: 25px / 30px; /* Rounded corners */
+    height: 50px; /* Adjust height */
+    width: 50vh;
+    font-size: 18px; /* Adjust font size */
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2); /* Add shadow */
+    border: none; /* Remove border */
+    padding: 10px; /* Add some padding */
+    outline: none;
+}
+
+input[type="number"] {
+    margin-top: 10px;
+    border-radius: 25px / 30px; /* Rounded corners */
+    height: 50px; /* Adjust height */
+    width: 50vw;
+    font-size: 18px; /* Adjust font size */
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2); /* Add shadow */
+    border: none; /* Remove border */
+    padding: 10px; /* Add some padding */
+    outline: none;
+}

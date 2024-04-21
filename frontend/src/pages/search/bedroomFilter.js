@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-function BedroomFilter() {
+function BedroomFilter({ callback }) {
   const [bedrooms, setBedrooms] = useState(0);
 
   const handleBedroomChange = (num) => {
     setBedrooms(num);
+    callback(num);
   };
 
   return (

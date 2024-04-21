@@ -21,7 +21,6 @@ const Login = () => {
             await googleSignIn();
         } catch (error) {
             console.log(error);
-
         }
     }
 
@@ -49,9 +48,15 @@ const Login = () => {
             </div>
             <div className="mid-container">
                 <div className="welcome-box">
-                    <div className="title">Welcome to ____</div>
+                    <div className="title">Welcome to</div>
+                    <div className="logo">
+                        <img className='logo' src={require('../../images/logo-light.png')}/>
+                    </div>
                     <div className="button-container">
                         <GoogleButton onClick={handleGoogleSignIn}/>
+                    </div>
+                    <div className='small-logo'>
+                        <img className='small-logo' src={require('../../images/small-logo-light.png')}/>
                     </div>
                 </div>
             </div>

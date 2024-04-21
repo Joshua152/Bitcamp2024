@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './search.css';
-function BathroomFilter() {
+function BathroomFilter({ callback }) {
   const [bathrooms, setBathrooms] = useState(0);
 
   const handleBathroomChange = (num) => {
     setBathrooms(num);
+    callback(num);
   };
 
   return (

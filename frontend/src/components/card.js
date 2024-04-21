@@ -19,7 +19,6 @@ function Card({ house, setPopupData }) {
         setPopupData(house);
     }
 
-
     return (
         <>
             <div className='card' onClick={updatePopupData}>
