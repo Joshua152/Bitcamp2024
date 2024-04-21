@@ -27,7 +27,7 @@ const Profile = () => {
       creditScore: parseInt(creditScore)
     });
     
-    navigate("/searc");
+    navigate("/search");
   }
   const handleSignOut = async () => {
     try {
