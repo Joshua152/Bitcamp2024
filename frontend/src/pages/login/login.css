@@ -12,9 +12,13 @@
   position: relative;
   z-index: 2;
 }
+.logo-main{
+  width: 100%;
+  height: auto
+}
 .welcome-box {
   width: 500px;
-  height: 400px;
+  height: auto;
   background-color: var(--alternate-bg);
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,15 +35,7 @@
   justify-content: center; /* Center horizontally */
 }
 
-.logo{
-  width:100%;
-  height: auto
-}
 
-.small-logo{
-  width:100%;
-  height: auto
-}
 
 .title {
   text-align: center;
@@ -49,7 +45,7 @@
 
 .area {
   background: (--bg-color);
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  background: -webkit-linear-gradient(to left, var(--first-button-color), (--alternate-bg));
   width: 100%;
   height: 100vh;
   position: absolute;

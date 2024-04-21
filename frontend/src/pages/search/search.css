@@ -2,6 +2,7 @@
 .container-search {
   display: flex;
   width: 100%;
+  background-color: #000;
   height: calc(100vh - 70px);
   justify-content: space-around;
 }
@@ -9,16 +10,30 @@
 .right-side, .left-side {
   display: inline-block;
   width:100%;
+  
 }
+.left-side{
+  opacity: 100%;
+  padding: 38px;
+}
+
 
 .search-bar {
   background-color: var(--alternate-bg);
+  box-shadow: var(--first-button-color) 0px 5px 5px 5px;
+  
+  z-index: 3;
+  border-radius: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+.search-bar-label {
+  color: white;
 }
 
 .background-image {
@@ -112,55 +127,81 @@ input[type="text"] {
 
 /*CODE PEN MAP*/
 
-#map {
-  position:absolute;
-  z-index:1;
-  top:0; bottom:0;
+.planet-container {
+  
+  border-radius: 50%;
+  box-shadow: 5px -3px 10px 3px #5e90f1;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  width: 500px;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
-.ol-control button { 
-  background-color: rgba(40, 40, 40, 0.8) !important;
-}
-.ol-control button:hover { 
-  background-color: rgba(40, 40, 40, 1) !important;
-}
-
-.ol_input_geocoder{
-position:fixed;
-top:50%;
-left:2px;
-z-index:20;
-}
-
-.ol-geocoder{
-position:fixed !important;
-top:10px !important;
-left:35% !important;
-width:100%;
+.right-side{
+  background-color: #000;
+  opacity: 100%;
+  
 }
 
-.gcd-gl-control{
-width:100% !important;
-background:none !important;
+.night {
+  animation: rotate-night 80s linear infinite;
+  background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_nightmap.jpg);
+  background-size: 200%;
+  height: 500px;
+  position: absolute;
+  width: 500px;
+  z-index: 2;
+}
+.day {
+  animation: rotate-day 80s linear infinite;
+  background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg);
+  background-size: 200%;
+  border-left: solid 1px black;
+  border-radius: 50%;
+  box-shadow: 5px 0 20px 10px #040615 inset; 
+  height: 500px;
+  margin-left: 110px;
+  position: absolute;
+  width: 500px;
+  z-index: 3;
+}
+.clouds {
+  animation: rotate-day 50s linear infinite, spin-clouds 100s ease infinite;
+  background-image: url(https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg);
+  background-size: 200%;
+  border-radius: 50%;    
+  box-shadow: 5px 0 20px 10px #040615 inset, -9px 0px 20px 10px #5e90f1 inset;
+  height: 500px;
+  margin-left: 100px;
+  opacity: 0.45;
+  position: absolute;
+  width: 500px;
+  z-index: 4;
+}
+.inner-shadow {
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -5px 0 10px 1px #152b57 inset, 5px 0 10px 1px #040615 inset;
+  height: 500px;
+  margin-left: 0;
+  position: absolute;
+  width: 500px;
+  z-index: 5;
 }
 
-.gcd-gl-btn{
-display:none !important;
+@keyframes rotate-day {
+  0% { background-position: 120% 0; }
+  100% { background-position: -80% 0; }
 }
-
-.ol-geocoder .gcd-gl-input{
-left:0 !important;
+@keyframes rotate-night {
+  0% { background-position: calc(120% + 120px) 0; }
+  100% { background-position: calc(-80% + 120px) 0; }
 }
-
-ul.gcd-gl-result{
-left:0 !important;
-}
-
-#marker {
-width: 40px;
-height: 40px;
-border-radius: 10px;
-background:url(https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png) no-repeat top center;
-background-size:100%;
-opacity: 1;
-cursor: move;
+@keyframes spin-clouds {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
 }
