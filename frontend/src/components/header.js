@@ -35,7 +35,7 @@ function Header({ userName, userProfilePic }) {
   return (
     <div className="header" onMouseLeave={handleMouseLeave}>
       <Link to="/search">
-        <img src={require('../images/small-logo-dark.png')} alt="Logo" className="logo" /> 
+        <img src={require('../images/small-logo-light.png')} alt="Logo" className="logo" /> 
       </Link>
       <div 
         onClick={toggleDropdown} 
@@ -52,7 +52,7 @@ function Header({ userName, userProfilePic }) {
             <div className='dropdown-menu2'>
               <Link to='/search'>Search</Link>
             </div>
-            <Link to="#" onClick={handleSignOut}>Logout</Link>
+            <Link to="/" onClick={handleSignOut}>Logout</Link>
           </div>
         )}
       </div>
