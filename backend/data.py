@@ -36,7 +36,18 @@ def get_houses_by_zip(zipcode, beds, baths, price):
 
         for key in data:
             if data[key] is None:
-                include = False
+                if key == "bathstotal":
+                    data[key] = 2
+                elif key == "beds":
+                    data[key] = 3
+                elif key == "roomsTotal":
+                    data[key] = 7
+                elif key == "listingPrice":
+                    data[key] = 400000
+                elif key == "lotsize":
+                    data[key] = 2500
+                else:
+                    include = False
 
         if include:
             houses.append(data)

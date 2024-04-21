@@ -1,6 +1,6 @@
 import { getProfileInfo } from "./firebase";
 
-const serverUrl = "http://10.104.95.79:5000";
+const serverUrl = "http://localhost:8080";
 
 const fakeData = [
     {
