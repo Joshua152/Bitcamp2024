@@ -13,6 +13,7 @@ def basic_authentication():
         print("Hello")
         res = Response()
         res.headers.add("Access-Control-Allow-Origin", "*")
+        res.headers.add("Access-Control-Allow-Headers", "Content-type")
         return res
 
 @app.route("/get", methods=["POST"])
