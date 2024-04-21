@@ -1,15 +1,24 @@
 import json
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 
 import data
 import sort
 
 app = Flask(__name__)
 
+@app.before_request
+def basic_authentication():
+    if request.method.lower() == 'options':
+        print("Hello")
+        res = Response()
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+
 @app.route("/get", methods=["POST"])
 def get():
     req = json.loads(request.data.decode("utf-8"))
+    print(req)
 
     bed_range = get_range(int(req["preferences"]["bed"]))
     bath_range = get_range(int(req["preferences"]["bath"]))
@@ -17,7 +26,7 @@ def get():
 
     houses = []
 
-    if req.locType == "zip":
+    if req["locType"] == "zip":
         houses = data.get_houses_by_zip(req["zipcode"], bed_range, bath_range, price_range)
     elif req.locType == "latlon":
         houses = data.get_houses_by_latlon(req["latlon"], bed_range, bath_range, price_range)
