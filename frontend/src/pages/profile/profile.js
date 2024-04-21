@@ -4,7 +4,9 @@ import { UserAuth } from '../../context/AuthContext';
 import { initializeApp } from 'firebase/app';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js'
+import { getIncomeDebt } from '../../data.js'
 import Input from './input.js'
+import Header from '../../components/header';
 import './profile.css';
 
 const Profile = () => {
@@ -14,6 +16,30 @@ const Profile = () => {
   const [creditScore, setCreditScore] = useState(-1);
   const [errored, setErrored] = useState(false);
   const navigate = useNavigate();
+
+  // (async function (user) {
+  //   return await getIncomeDebt(user);
+  // })(user).then((v) => {
+  //   // console.log("user")
+  //   console.log("user" + v)
+  //   // const inc = v.income
+  //   // const md = v.monthlyDebt
+  //   // const cs = v.creditScore
+
+  //   const inc = 10
+  //   const md = 20
+  //   const cs = 30
+
+  //   if(inc != undefined && md != undefined && cs != undefined) {
+  //     setIncome(v.income);
+  //     setMonthlyDebt(v.monthlyDebt);
+  //     setCreditScore(v.creditScore);
+
+  //     setIncome(inc);
+  //     setMonthlyDebt(md);
+  //     setCreditScore(cs);
+  //   }
+  // });
 
   const handleUpdate = async() => {
     if(income === -1 || monthlyDebt === -1 || creditScore === -1) {
@@ -44,10 +70,12 @@ const Profile = () => {
   // Need credit score, income after tax, debt, zipcode, 
   return (
     <div className='body'>
+    <Header userName={user?.displayName} userProfilePic={user?.photoURL} /> 
       <div className='profile-container'>
+                        
         <h1 style={{ marginBottom: '50px' }}>Profile</h1>
 
-        <h3 style={{color: "red", marginBottom: "20px", visibility: {errored ? "visible" : "}}}>Error: Please fill all fields</h3>
+        <h3 style={{color: "red", marginBottom: "20px", visibility: errored ? "visible" : "hidden"}}>Error: Please fill all fields</h3>
 
         <Input type="number" label="Annual Post-Tax Income" placeholder="Enter annual post-tax income" handleValue={() => {income}} handleChange={(event) => {setIncome(event.target.value)}}/>
         <Input type="number" label="Monthly Debt" placeholder="Enter monthly debt" handleValue={() => {monthlyDebt}} handleChange={(event) => {setMonthlyDebt(event.target.value)}}/>
@@ -56,13 +84,6 @@ const Profile = () => {
         <div className='btn' onClick={handleUpdate}>Update</div>
       </div>
 
-      <div style={{ marginTop: "100px" }}></div>
-
-      {user?.displayName ? (
-        <button onClick={handleSignOut}> <Link to='../login'>Logout</Link></button>
-      ) : (
-        <Link to='../login'></Link>
-      ) }
     </div>
   );
 };

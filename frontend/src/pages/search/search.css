@@ -1,12 +1,26 @@
+@import "~leaflet/dist/leaflet.css";
+
 /* search.css */
+.container-search {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 70px);
+  justify-content: space-around;
+}
+
+.right-side, .left-side {
+  display: inline-block;
+  width:100%;
+}
 
 .search-bar {
+  background-color: var(--alternate-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .background-image {
@@ -26,6 +40,7 @@
 
 .filter-label {
   text-align: left;
+  color: var(--opposite-text-color);
 }
 
 input[type="text"] {
@@ -59,6 +74,7 @@ input[type="text"] {
   border: none;
   outline: none;
   transition: transform 0.3s ease; /* Add transition for smooth effect */
+  cursor: pointer;
 }
 
 /* Adjust animation behavior when hovered */
@@ -68,7 +84,7 @@ input[type="text"] {
 }
 
 .button:not(.button-selected):hover {
-  background-color: rgba(135, 192, 205, 0.312); /* Change background color on hover to be lighter */
+  background-color: rgba(162, 162, 162, 0.899); /* Change background color on hover to be lighter */
   transform: scale(0.9); /* Make button smaller on hover */
 }
 
@@ -84,7 +100,7 @@ input[type="text"] {
   margin-top: 80px; /* Adjust margin-top to reduce space */
   border: none;
   border-radius: 25px; /* Match border-radius with input */
-  color: white; /* White text color */
+  color: var(--text-color); /* White text color */
   font-size: 16px; /* Adjust font size */
   font-weight: bold; /* Bold text */
   cursor: pointer;
@@ -92,7 +108,61 @@ input[type="text"] {
 }
 
 .search-button:hover {
-
-  background-color: #45a049; /* Darker green background color on hover */
+  color: var(--opposite-text-color);
+  background-color: #F08000; /* Darker green background color on hover */
 }
 
+/*CODE PEN MAP*/
+
+#map {
+  position:absolute;
+  z-index:1;
+  top:0; bottom:0;
+}
+.ol-control button { 
+  background-color: rgba(40, 40, 40, 0.8) !important;
+}
+.ol-control button:hover { 
+  background-color: rgba(40, 40, 40, 1) !important;
+}
+
+.ol_input_geocoder{
+position:fixed;
+top:50%;
+left:2px;
+z-index:20;
+}
+
+.ol-geocoder{
+position:fixed !important;
+top:10px !important;
+left:35% !important;
+width:100%;
+}
+
+.gcd-gl-control{
+width:100% !important;
+background:none !important;
+}
+
+.gcd-gl-btn{
+display:none !important;
+}
+
+.ol-geocoder .gcd-gl-input{
+left:0 !important;
+}
+
+ul.gcd-gl-result{
+left:0 !important;
+}
+
+#marker {
+width: 40px;
+height: 40px;
+border-radius: 10px;
+background:url(https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png) no-repeat top center;
+background-size:100%;
+opacity: 1;
+cursor: move;
+}
