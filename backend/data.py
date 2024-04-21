@@ -23,6 +23,7 @@ def get_houses_by_zip(zipcode, beds, baths, price):
     houses = []
 
     for house in raw_json:
+        include = True
         data = {
             "attomId": house["identifier"]["attomId"],
             "lotsize": house["lot"]["lotsize2"],
@@ -33,10 +34,12 @@ def get_houses_by_zip(zipcode, beds, baths, price):
             "listingPrice": house["avm"]["amount"]["value"]
         }
 
-        if data["lotsize"] is None:
-            continue
-            
-        houses.append(data)
+        for key in data:
+            if data[key] is None:
+                include = False
+
+        if include:
+            houses.append(data)
 
     return houses
 

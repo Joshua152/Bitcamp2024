@@ -5,13 +5,6 @@ import BedroomFilter from './bedroomFilter';
 import BathroomFilter from './bathroomFilter';
 import { UserAuth } from '../../context/AuthContext';
 import { getHousesByZip } from '../../data';
-import 'ol/ol.css';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import Overlay from 'ol/Overlay';
-import { fromLonLat } from 'ol/proj';
 
 
 
