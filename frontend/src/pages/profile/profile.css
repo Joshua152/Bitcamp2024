@@ -24,20 +24,32 @@ form {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  background-color: var(--alternate-bg);
+  color: var(--opposite-text-color);
   height: calc(100vh - 50px);
 }
 
 .btn {
-  width: 75px;
-  background-color: var(--first-button-color);
-  padding: 10px 10px 10px 10px;
-  border-radius: 10px;
+  width: 150px; /* Adjust width as needed */
+  height: 50px;
+  text-align: center;
+  align-content: center;
+
+  background-color: var(--bg-color);
+  margin-top: 40px; /* Adjust margin-top to reduce space */
+  border: none;
+  border-radius: 25px; /* Match border-radius with input */
+  color: var(--text-color); /* White text color */
+  font-size: 16px; /* Adjust font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: var(--second-button-color);
+  color: var(--opposite-text-color);
+  background-color: #F08000;
   box-shadow: 1px 3px 5px 1px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
 }
 
 .logout-wrapper {

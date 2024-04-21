@@ -3,7 +3,7 @@
   top: 0; /* Add this line to stick the header to the top */
   width: 100%;
   height: 70px;
-  background-color: #f8f9fa;
+  background-color: var(--alternate-bg);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
 
 
 .header:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Increased shadow on hover */
+  box-shadow: 0px 4px 10px rgba(233, 231, 231, 0.3); /* Increased shadow on hover */
 }
 
 
@@ -37,8 +37,9 @@
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: white; /* White background */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow */
+  color: var(--opposite-text-color);
+  background-color: var(--alternate-bg); /* White background */
+  box-shadow: 0px 2px 4px rgba(72, 72, 72, 0.5); /* Shadow */
   border-radius: 4px; /* Rounded corners */
   padding: 10px;
   max-height: 200px; /* Initially hide the dropdown menu */
@@ -93,5 +94,5 @@ a {
 
 .user-name {
   font-size: 16px;
-  color: #333;
+  color: var(--opposite-text-color);
 }

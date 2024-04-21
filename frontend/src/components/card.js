@@ -37,7 +37,7 @@ function Card({ house, setPopupData }) {
                 </div>
                 <div className='separator' />
                 <div className='property-container'>
-                    <div className='property'><strong>Price: </strong> {house.listingPrice}</div>
+                    <div  className='property'><strong>Price: </strong> {house.listingPrice}</div>
                     <div className='property'><strong>Lot Size (ft²): </strong> {house.lotsize}</div>
                     <div className='property'><strong>Baths: </strong> {house.bathstotal}</div>
                     <div className='property'><strong>Beds: </strong> {house.beds}</div>
