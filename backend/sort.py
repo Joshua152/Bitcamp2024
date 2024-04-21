@@ -8,7 +8,7 @@ Eventually use customerId to get income and debt from nessie api
 def get_viable_houses(zipcode, prefs, income, debt):
     (min_afford, max_afford) = calc_affordable_price(income, debt)
 
-    house_list = get_houses(zipcode, 
+    house_list = get_houses_by_zip(zipcode, 
                (prefs["bed"], prefs["bed"] + 3), 
                (prefs["bath"], prefs["bath"] + 6), 
                (min_afford, max_afford)
