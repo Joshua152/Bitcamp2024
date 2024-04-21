@@ -5,7 +5,6 @@ import { initializeApp } from 'firebase/app';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase.js'
 import Input from './input.js'
-import Header from '../../components/header.js';
 import './profile.css';
 
 const Profile = () => {
@@ -28,10 +27,27 @@ const Profile = () => {
       creditScore: parseInt(creditScore)
     });
     
-    navigate("/search");
-;;)
-  }marginTop: '20px', {/* , marginBottom: "20px", visibility: errored ? 'visible' : 'hidden'}}>P */}
-        {/* <p style={{visibility: errored ? 'visible' : 'hidden'}}>Error: please fill all fields</p> */}
+    navigate("/searc")etagiv
+  }
+  const handleSignOut = async () => {
+    try {
+      await logOut()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleChange = (event) => {
+    return event.target.value
+  }
+
+  // Need credit score, income after tax, debt, zipcode, 
+  return (
+    <div className='body'>
+      <div className='profile-container'>
+        <h1 style={{ marginBottom: '50px' }}>Profile</h1>
+
+        <h3 style={{color: "red", marginBottom: "20px", visibility: {errored ? "visible" : "}}}>Error: Please fill all fields</h3>
 
         <Input type="number" label="Annual Post-Tax Income" placeholder="Enter annual post-tax income" handleValue={() => {income}} handleChange={(event) => {setIncome(event.target.value)}}/>
         <Input type="number" label="Monthly Debt" placeholder="Enter monthly debt" handleValue={() => {monthlyDebt}} handleChange={(event) => {setMonthlyDebt(event.target.value)}}/>
@@ -40,14 +56,13 @@ const Profile = () => {
         <div className='btn' onClick={handleUpdate}>Update</div>
       </div>
 
-      <div className='logout-wrapper'>
-        {user?.displayName ? (
-          // <Link to='../login'>Logout</Link>
-          <div className='btn' onClick={handleSignOut}><a href='../login'>Logout</a></div>
-        ) : (
-          <Link to='../login'></Link>
-        ) }
-      </div>
+      <div style={{ marginTop: "100px" }}></div>
+
+      {user?.displayName ? (
+        <button onClick={handleSignOut}> <Link to='../login'>Logout</Link></button>
+      ) : (
+        <Link to='../login'></Link>
+      ) }
     </div>
   );
 };
