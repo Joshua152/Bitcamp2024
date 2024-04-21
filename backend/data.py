@@ -17,6 +17,7 @@ def get_houses_by_zip(zipcode, beds, baths, price):
     }
 
     res = requests.get(url, headers=headers)
+    print(res.json())
     raw_json = res.json()["property"]
 
     houses = []
@@ -31,6 +32,9 @@ def get_houses_by_zip(zipcode, beds, baths, price):
             "roomsTotal": house["building"]["rooms"]["roomsTotal"],
             "listingPrice": house["avm"]["amount"]["value"]
         }
+
+        if data["lotsize"] is None:
+            continue
             
         houses.append(data)
 
