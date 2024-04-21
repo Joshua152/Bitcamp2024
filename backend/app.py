@@ -1,4 +1,5 @@
 import json
+import os
 
 from flask import Flask, request, jsonify, Response
 
@@ -15,6 +16,10 @@ def basic_authentication():
         res.headers.add("Access-Control-Allow-Origin", "*")
         res.headers.add("Access-Control-Allow-Headers", "Content-type")
         return res
+
+@app.route("/")
+def index():
+    return "Hello World"
 
 @app.route("/get", methods=["POST"])
 def get():
@@ -48,4 +53,4 @@ def get_range(value):
     return (max(0, value - 2), value + 2)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
