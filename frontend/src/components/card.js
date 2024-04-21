@@ -2,10 +2,16 @@ import React from 'react';
 import './card.css';
 
 function Pie({ percent, label, color }) {
+    let color1;
+    if (percent < 60) {
+        color1 = `rgb(${255}, ${5.1 * percent}, 0)`; // red to yellow
+    } else {
+        color1 = `rgb(${255 - 5.1 * (percent - 50)}, ${255}, 0)`; // yellow to green
+    }
     return (
         <>
             <div className='pie-container'>
-                <div class='pie' style={{ '--p': percent, '--b': '10px', '--c': color }}></div>
+                <div class='pie' style={{ '--p': percent, '--b': '10px', '--c': color1 }}></div>
                 <h5>{label}</h5>
             </div>
         </>

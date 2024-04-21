@@ -49,14 +49,11 @@ const Login = () => {
             <div className="mid-container">
                 <div className="welcome-box">
                     <div className="title">Welcome to</div>
-                    <div className="logo">
-                        <img className='logo' src={require('../../images/logo-light.png')}/>
+                    <div className="logo-main">
+                        <img className='logo-main' src={require('../../images/logo-light.png')}/>
                     </div>
                     <div className="button-container">
                         <GoogleButton onClick={handleGoogleSignIn}/>
-                    </div>
-                    <div className='small-logo'>
-                        <img className='small-logo' src={require('../../images/small-logo-light.png')}/>
                     </div>
                 </div>
             </div>
